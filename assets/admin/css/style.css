@@ -1,0 +1,17 @@
+    .sticky-sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh; /* Ensures it occupies full viewport height */
+    overflow-y: auto; /* Enables scrolling for overflow content */
+    z-index: 999; /* Ensures it stays on top */
+}
+
+
+.sticky-panel {
+    position: sticky; /* Makes the element sticky */
+    top: 0; /* Position it at the top of its container */
+    z-index: 10; /* Ensures it stays on top of other elements */
+    background-color: #fff; /* Match the sidebar background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add subtle shadow for separation */
+    padding: 10px; /* Adjust padding for better spacing */
+}
