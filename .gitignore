@@ -5,7 +5,10 @@
 /public/storage
 /storage/*.key
 /vendor
-/storage
+/storage/*
+!/storage/app/
+!/storage/framework/
+!/storage/logs/
 /blog
 .env
 .htaccess
