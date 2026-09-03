@@ -82,6 +82,9 @@
                                                 <td>{{ $product->google_merchant ? 'Yes' : 'No' }}</td>
                                                 <td>{{ category($product->category_id)->name }}</td>
                                                 <td>
+                                                    <a href="{{ route('product_details', $product->slug) }}" target="_blank" class="btn btn-sm btn-outline-secondary" title="Preview on site">
+                                                        <i class="fas fa-eye"></i> Preview
+                                                    </a>
                                                     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-outline-primary">
                                                         <i class="fas fa-edit"></i> Update
                                                     </a>

@@ -144,6 +144,17 @@
     <script src="{{ url('/') }}/lucare/assets/js/main.js?v=3.4"></script>
     <script src="{{ url('/') }}/lucare/assets/js/shop.js?v=3.4"></script>
 
+    <!-- Desktop nav hover dropdown -->
+    <script>
+        (function () {
+            $('.tawa-nav .dropdown').each(function () {
+                var $li = $(this);
+                $li.on('mouseenter', function () { $li.addClass('open'); });
+                $li.on('mouseleave', function () { $li.removeClass('open'); });
+            });
+        })();
+    </script>
+
 
 
 

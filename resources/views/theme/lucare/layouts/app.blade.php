@@ -76,7 +76,7 @@
                 position: absolute;
                 top: 100%;
                 left: 0;
-                margin-top: 4px;
+                margin-top: 0;
                 min-width: 210px;
                 padding: 6px 0;
                 border: 0;
@@ -84,9 +84,10 @@
                 box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
                 list-style: none;
                 z-index: 1000;
+                background: #fff;
             }
             .tawa-nav .dropdown:hover > .dropdown-menu,
-            .tawa-nav .dropdown:focus-within > .dropdown-menu { display: block; }
+            .tawa-nav .dropdown.open > .dropdown-menu { display: block; }
             .tawa-nav .dropdown-item { display: block; padding: 7px 16px; font-size: 13.5px; color: #253d4e; text-decoration: none; transition: background .15s ease, color .15s ease; }
             .tawa-nav .dropdown-item:hover { background: #f4f6f9; color: #088178; }
         }
