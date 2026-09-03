@@ -26,7 +26,7 @@ class ProductService{
     public function find($id){
         $product=$this->productService->find($id);
         if(!$product){
-            return redirect()->route('products.index')->with("errors", "Product Not Found");
+            return redirect()->route('products.index')->with("error", "Product Not Found");
         }else{
             return $product;
         }
@@ -37,7 +37,7 @@ class ProductService{
         $product=Product::where('name',$data['name'])->first();
 
         if(!empty($product)){
-            return redirect()->back()->with('errors',"Product Already Exists");
+            return redirect()->back()->with('error',"Product Already Exists");
         }
 
        
@@ -67,7 +67,7 @@ class ProductService{
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            return back()->with('errors',[$th->getMessage()]);
+            return back()->with('error', $th->getMessage());
         }
     }
 
@@ -75,12 +75,12 @@ class ProductService{
         $data = $request->all();
         $product =$this->productService->find($id);
         if(!$product){
-            return redirect()->route('products.index')->with("errors", "Product Not Found");
+            return redirect()->route('products.index')->with("error", "Product Not Found");
         }
 
         $validate=$this->validateProduct($data);
         if($validate->fails()){
-            return back()->with("errors", $validate->errors()->all());
+            return back()->withErrors($validate)->withInput();
         }
 
         
@@ -103,7 +103,7 @@ class ProductService{
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            return back()->with('errors',[$th->getMessage()]);
+            return back()->with('error', $th->getMessage());
         }
 
     }
@@ -111,7 +111,7 @@ class ProductService{
     public function delete($id){
         $product =$this->productService->find($id);
         if(!$product){
-            return redirect()->route('products.index')->with("errors", "Product Not Found");
+            return redirect()->route('products.index')->with("error", "Product Not Found");
         }
         $file_path = normalizeFilePath(storage_path().'/app/public/'.$product->photo);
 

@@ -77,29 +77,18 @@
             <!-- Product Image Section -->
             <div class="col-lg-6">
                 <div class="detail-gallery">
-                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            @if($mediafiles->count() > 0)
-                                @foreach($mediafiles as $index => $media)
-                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                        <img src="{{ $media->file_path }}" alt="{{ $product->image_alt }}" class="d-block w-100" width="600" height="450" style="height: 450px; object-fit: contain; background:#fff;">
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="carousel-item active">
-                                    <img src="{{ $product->image_src }}" alt="{{ $product->image_alt }}" class="d-block w-100" width="600" height="450" fetchpriority="high" style="height: 450px; object-fit: contain; background:#fff;">
-                                </div>
-                            @endif
-                        </div>
-                        @if($mediafiles->count() > 1)
-                        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        </button>
-                        @endif
+                    <div style="background:#fff; border:1px solid #eceff4; border-radius:10px; padding:20px;">
+                        <img src="{{ $product->image_src }}" alt="{{ $product->image_alt }}" width="600" height="450" fetchpriority="high" style="width:100%; height:450px; object-fit:contain;">
                     </div>
+                    @if($mediafiles->count() > 0)
+                        <div class="row mt-2 g-2">
+                            @foreach($mediafiles as $media)
+                                <div class="col-3 col-md-2">
+                                    <img src="{{ $media->file_path }}" alt="{{ $product->image_alt }}" loading="lazy" width="100" height="100" style="width:100%; height:90px; object-fit:contain; background:#fff; border:1px solid #eceff4; border-radius:6px;">
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -183,36 +172,23 @@
         </div>
 
         <!-- Description & Specifications -->
-        <div class="tab-style3 mt-5">
-            <ul class="nav nav-tabs text-uppercase">
-                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#Description">Description</a></li>
-                @if($product->specifications)
-                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#Specifications">Specifications</a></li>
-                @endif
-            </ul>
-            <div class="tab-content mt-3">
-                <div class="tab-pane fade show active" id="Description">
-                    <div class="container">
-                        <div id="homepage-description">{!! $product->description !!}</div>
-                    </div>
-                </div>
-                @if($product->specifications)
-                <div class="tab-pane fade" id="Specifications">
-                    <div class="container">
-                        <table class="table table-striped table-bordered">
-                            <tbody>
-                                @foreach($product->specifications as $spec)
-                                <tr>
-                                    <th class="w-25">{{ $spec['name'] ?? '' }}</th>
-                                    <td>{{ $spec['value'] ?? '' }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                @endif
-            </div>
+        <div class="mt-5">
+            <h2 class="fs-4 mb-3">Description</h2>
+            <div id="homepage-description">{!! $product->description !!}</div>
+
+            @if($product->specifications)
+            <h2 class="fs-4 mb-3 mt-4">Specifications</h2>
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    @foreach($product->specifications as $spec)
+                    <tr>
+                        <th class="w-25">{{ $spec['name'] ?? '' }}</th>
+                        <td>{{ $spec['value'] ?? '' }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endif
         </div>
 
         <!-- Related Products -->
