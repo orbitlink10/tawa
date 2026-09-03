@@ -35,15 +35,11 @@
                 <span class="{{ $cardProduct->is_in_stock ? 'text-success' : 'text-danger' }}">{{ $cardProduct->availability_label }}</span>
             </div>
             <div class="d-flex gap-2">
-                @if($cardProduct->has_price && $cardProduct->is_in_stock)
                 <form action="{{ route('cart.add') }}" method="POST" class="flex-grow-1">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $cardProduct->id }}">
                     <button type="submit" class="btn btn-primary btn-sm w-100"><i class="fi-rs-shopping-cart-add me-1"></i>Add to Cart</button>
                 </form>
-                @else
-                <a href="{{ route('contacts') }}" class="btn btn-outline-dark btn-sm flex-grow-1">Request Quote</a>
-                @endif
                 <a href="{{ route('product_details', $cardProduct->slug) }}" class="btn btn-outline-secondary btn-sm">View</a>
             </div>
         </div>

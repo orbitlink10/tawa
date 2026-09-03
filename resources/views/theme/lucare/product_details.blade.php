@@ -139,25 +139,18 @@
                     </ul>
 
                     <div class="detail-extralink">
-                        @if($product->has_price)
-                            <form action="{{ route('cart.add') }}" method="POST" class="d-flex align-items-center flex-wrap gap-2">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                <div class="d-flex align-items-center me-2">
-                                    <label class="me-2 small text-muted">Qty</label>
-                                    <input type="number" name="quantity" value="1" min="1" max="{{ max((int) $product->stock, 1) }}" class="form-control form-control-sm" style="width: 70px;">
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-lg shadow-sm">Add to Cart</button>
-                                <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', get_option('contact_phone')) }}?text={{ urlencode('Hello, I am interested in '.$product->name) }}" target="_blank" rel="noopener" class="btn btn-success btn-lg shadow-sm">
-                                    <i class="fab fa-whatsapp"></i> Buy via WhatsApp
-                                </a>
-                            </form>
-                        @else
-                            <a href="{{ route('contacts') }}" class="btn btn-dark btn-lg shadow-sm">Request a Quote</a>
-                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', get_option('contact_phone')) }}?text={{ urlencode('Hello, I would like a quote for '.$product->name) }}" target="_blank" rel="noopener" class="btn btn-success btn-lg shadow-sm">
-                                <i class="fab fa-whatsapp"></i> WhatsApp Enquiry
+                        <form action="{{ route('cart.add') }}" method="POST" class="d-flex align-items-center flex-wrap gap-2">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <div class="d-flex align-items-center me-2">
+                                <label class="me-2 small text-muted">Qty</label>
+                                <input type="number" name="quantity" value="1" min="1" max="{{ max((int) $product->stock, 1) }}" class="form-control form-control-sm" style="width: 70px;">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">Add to Cart</button>
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', get_option('contact_phone')) }}?text={{ urlencode('Hello, I am interested in '.$product->name) }}" target="_blank" rel="noopener" class="btn btn-success btn-lg shadow-sm">
+                                <i class="fab fa-whatsapp"></i> Buy via WhatsApp
                             </a>
-                        @endif
+                        </form>
                     </div>
 
                     <div class="delivery-info mt-4 p-3 bg-light rounded">
