@@ -21,21 +21,16 @@ class DownloadProductImages extends Command
     {
         $query = Product::whereNotNull('image_url')->where('image_url', '!=', '');
 
-        if (! $this->option('force')) {
-            $query->where(function ($q) {
-                $q->whereNull('photo')->orWhere('photo', '');
-            });
-        }
-
         if ((int) $this->option('limit') > 0) {
             $query->limit((int) $this->option('limit'));
         }
 
         $products = $query->get(['id', 'name', 'slug', 'image_url', 'photo']);
-        $this->info('Found '.$products->count().' products to download.');
+        $this->info('Found '.$products->count().' products with image_url.');
 
         $bar = $this->output->createProgressBar($products->count());
         $downloaded = 0;
+        $skipped = 0;
         $failed = 0;
 
         foreach ($products as $product) {
@@ -43,6 +38,12 @@ class DownloadProductImages extends Command
 
             $ext = $this->extensionFromUrl($product->image_url);
             $filename = 'products/'.$product->slug.'.'.$ext;
+
+            // Skip only when the file actually exists (unless --force).
+            if (! $this->option('force') && ! empty($product->photo) && Storage::disk('public')->exists($filename)) {
+                $skipped++;
+                continue;
+            }
 
             if ($this->option('dry-run')) {
                 $downloaded++;
@@ -88,7 +89,7 @@ class DownloadProductImages extends Command
 
         $bar->finish();
         $this->newLine(2);
-        $this->info("Downloaded: {$downloaded} | Failed: {$failed}");
+        $this->info("Downloaded: {$downloaded} | Skipped (already exist): {$skipped} | Failed: {$failed}");
 
         return self::SUCCESS;
     }

@@ -59,34 +59,51 @@
     <link rel="stylesheet" href="{{ url('/') }}/lucare/assets/css/style.css">
 
     <style>
+        .tawa-header { background: #fff; border-bottom: 1px solid #eceff4; position: sticky; top: 0; z-index: 1020; }
+        .tawa-header .container { max-width: 1400px; }
+        .tawa-header-row { height: 62px; gap: 20px; }
+        .tawa-logo { flex-shrink: 0; text-decoration: none; }
+        .tawa-logo .brand-logo { font-size: 1.35rem; }
+
+        .tawa-nav ul { display: flex; list-style: none; margin: 0; padding: 0; align-items: center; gap: 2px; }
+        .tawa-nav > ul > li > a { display: block; padding: 8px 11px; font-weight: 600; font-size: 13.5px; color: #253d4e; text-decoration: none; white-space: nowrap; border-radius: 8px; transition: color .15s ease, background .15s ease; }
+        .tawa-nav > ul > li > a:hover { color: #088178; background: #f4f6f9; }
+
         @media (min-width: 992px) {
-            .main-menu .dropdown { position: relative; }
-            .main-menu .dropdown-menu {
+            .tawa-nav .dropdown { position: relative; }
+            .tawa-nav .dropdown-menu {
                 display: none;
+                position: absolute;
                 top: 100%;
                 left: 0;
-                margin-top: 0;
-                min-width: 240px;
-                padding: 8px 0;
+                margin-top: 4px;
+                min-width: 210px;
+                padding: 6px 0;
                 border: 0;
-                border-radius: 10px;
-                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+                border-radius: 8px;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+                list-style: none;
+                z-index: 1000;
             }
-            .main-menu .dropdown:hover > .dropdown-menu,
-            .main-menu .dropdown:focus-within > .dropdown-menu {
-                display: block;
-            }
-            .main-menu .dropdown .dropdown-item {
-                padding: 9px 18px;
-                font-size: 14px;
-                color: #253d4e;
-                transition: background-color .15s ease, color .15s ease;
-            }
-            .main-menu .dropdown .dropdown-item:hover {
-                background: #f4f6f9;
-                color: #088178;
-            }
+            .tawa-nav .dropdown:hover > .dropdown-menu,
+            .tawa-nav .dropdown:focus-within > .dropdown-menu { display: block; }
+            .tawa-nav .dropdown-item { display: block; padding: 7px 16px; font-size: 13.5px; color: #253d4e; text-decoration: none; transition: background .15s ease, color .15s ease; }
+            .tawa-nav .dropdown-item:hover { background: #f4f6f9; color: #088178; }
         }
+
+        .tawa-search { flex: 1; max-width: 340px; min-width: 180px; }
+        .tawa-search form { display: flex; align-items: center; border: 1px solid #e2e6ec; border-radius: 999px; overflow: hidden; background: #f7f8fa; }
+        .tawa-search input { flex: 1; border: 0; padding: 9px 16px; font-size: 13.5px; background: transparent; outline: none; color: #253d4e; }
+        .tawa-search button { border: 0; background: #0b6efd; color: #fff; padding: 0 15px; height: 36px; cursor: pointer; }
+
+        .tawa-actions { display: flex; align-items: center; gap: 14px; }
+        .tawa-action { position: relative; color: #253d4e; font-size: 20px; line-height: 1; text-decoration: none; }
+        .tawa-action:hover { color: #088178; }
+        .tawa-count { position: absolute; top: -8px; right: -10px; background: #0b6efd; color: #fff; font-size: 10.5px; border-radius: 999px; min-width: 18px; height: 18px; line-height: 18px; text-align: center; padding: 0 4px; font-weight: 700; }
+        .tawa-account { background: #253d4e; color: #fff; padding: 8px 16px; border-radius: 999px; font-size: 13.5px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+        .tawa-account:hover { background: #088178; color: #fff; }
+
+        .burger-icon { cursor: pointer; width: 26px; }
     </style>
 
     <!-- Site-wide JSON-LD: Organization + WebSite -->
@@ -149,181 +166,67 @@
 
 
 <body>
-    <header class="header-area header-style-1 header-height-2">
+    <header class="header-area header-style-1 tawa-header">
+        @php
+            $menuCategories = \App\Models\Category::with('subCategories')->orderBy('id')->get();
+            $menuBrands = \App\Models\Brand::where('is_active', true)->orderBy('name')->get();
+            $cartCount = count(session()->get('cart', []));
+        @endphp
 
-        <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
-            <div class="container">
-                <div class="header-wrap">
-                    <div class="logo logo-width-1">
-                        <a href="{{ url('/')}}">
-                            @include('partials.logo')
-                        </a>
-                    </div>
+        <div class="container">
+            <div class="tawa-header-row d-none d-lg-flex align-items-center justify-content-between">
+                <a href="{{ url('/') }}" class="tawa-logo">@include('partials.logo')</a>
 
-                    <?php 
+                <nav class="tawa-nav">
+                    <ul>
+                        <li><a href="{{ url('/') }}">Home</a></li>
+                        @foreach($menuCategories as $mc)
+                        <li class="dropdown">
+                            <a href="{{ route('view_product_category', $mc->slug) }}" class="dropdown-toggle">{{ $mc->name }}</a>
+                            @if($mc->subCategories->count() > 0)
+                            <ul class="dropdown-menu">
+                                @foreach($mc->subCategories as $msc)
+                                <li><a class="dropdown-item" href="{{ route('view_product_sub_category', ['category' => $mc->slug, 'subcategory' => $msc->slug]) }}">{{ $msc->name }}</a></li>
+                                @endforeach
+                            </ul>
+                            @endif
+                        </li>
+                        @endforeach
+                        <li class="dropdown">
+                            <a href="{{ route('brands.index') }}" class="dropdown-toggle">Brands</a>
+                            <ul class="dropdown-menu">
+                                @foreach($menuBrands as $mb)
+                                <li><a class="dropdown-item" href="{{ route('brand.show', $mb->slug) }}">{{ $mb->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        <li><a href="{{ route('blogs') }}">Blog</a></li>
+                        <li><a href="{{ route('contacts') }}">Contact</a></li>
+                    </ul>
+                </nav>
 
-                    $categories = \App\Models\Category::all();
-                    ?>
-                    <div class="header-right">
-                        <div class="search-style-2">
-                            <form action="{{ url('shop') }}" method="get">
-                                <input type="text" name="q" placeholder="Search products, models (e.g. RB4011, CPE510)..." required>
-                                <button type="submit">
-                                    <i class="fi-rs-search"></i>
-                                </button>
-                            </form>
-                        </div>
-                        @php
-                        $cart = session()->get('cart', []);
-                        $total = 0;
-                        foreach ($cart as $item) {
-                            $total += $item['price'] * $item['quantity'];
-                        }
-                        @endphp
+                <div class="tawa-search">
+                    <form action="{{ url('shop') }}" method="get">
+                        <input type="text" name="q" placeholder="Search products, models (e.g. RB4011, CPE510)..." required>
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
 
-                        <div class="container-fluid">
-                            <div class="d-flex justify-content-end align-items-center py-3">
-                                <!-- Wishlist Icon -->
-                                <div class="me-3">
-                                    <a href="{{ route('wishlist.index') }}" class="text-dark text-decoration-none d-flex align-items-center">
-                                        <img class="svgInject" alt="Evara" src="{{ url('/') }}/lucare/assets/imgs/theme/icons/icon-heart.svg" width="24" height="24">
-                                        <span class="badge bg-dark ms-2">0</span>
-                                    </a>
-                                </div>
-
-                                <!-- Cart Icon -->
-                                <div class="me-3">
-                                    <a href="{{ route('cart.view') }}" class="text-dark text-decoration-none d-flex align-items-center">
-                                        <img alt="Evara" src="{{ url('/') }}/lucare/assets/imgs/theme/icons/icon-cart.svg" width="24" height="24">
-                                        <span class="badge bg-dark ms-2">{{ count(Session::get('cart', [])) }}</span>
-                                    </a>
-                                </div>
-
-                                <!-- Account Button -->
-                                <div>
-                                    <a href="{{ route('login') }}" class="btn btn-dark d-flex align-items-center px-3 py-2 rounded-pill text-white">
-                                        <i class="bi bi-person-circle me-2" style="font-size: 20px;"></i> My Account
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-                    </div>
+                <div class="tawa-actions">
+                    <a href="{{ route('wishlist.index') }}" class="tawa-action" title="Wishlist"><i class="fa fa-heart"></i></a>
+                    <a href="{{ route('cart.view') }}" class="tawa-action" title="Cart"><i class="fa fa-shopping-cart"></i><span class="tawa-count">{{ $cartCount }}</span></a>
+                    <a href="{{ route('login') }}" class="tawa-account" title="Account"><i class="fa fa-user"></i> Account</a>
                 </div>
             </div>
-        </div>
-        <div class="header-bottom header-bottom-bg-color sticky-bar">
-            <div class="container">
-                <div class="header-wrap header-space-between position-relative">
-                    <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="{{ url('/')}}">@include('partials.logo')</a>
-                    </div>
-                    @php
-                        $menuCategories = \App\Models\Category::with('subCategories')->orderBy('id')->get();
-                        $menuBrands = \App\Models\Brand::where('is_active', true)->orderBy('name')->get();
-                    @endphp
-                    <div class="header-nav d-none d-lg-flex">
 
-                        <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
-                            <nav>
-                                <ul>
-                                    <li><a href="{{ url('/') }}">Home</a></li>
-
-                                    @foreach($menuCategories as $mc)
-                                    <li class="position-relative dropdown">
-                                        <a href="{{ route('view_product_category', $mc->slug) }}" class="dropdown-toggle">{{ $mc->name }}</a>
-                                        @if($mc->subCategories->count() > 0)
-                                        <ul class="dropdown-menu">
-                                            @foreach($mc->subCategories as $msc)
-                                            <li><a class="dropdown-item" href="{{ route('view_product_sub_category', ['category' => $mc->slug, 'subcategory' => $msc->slug]) }}">{{ $msc->name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                        @endif
-                                    </li>
-                                    @endforeach
-
-                                    <li class="position-relative dropdown">
-                                        <a href="{{ route('brands.index') }}" class="dropdown-toggle">Brands</a>
-                                        <ul class="dropdown-menu">
-                                            @foreach($menuBrands as $mb)
-                                            <li><a class="dropdown-item" href="{{ route('brand.show', $mb->slug) }}">{{ $mb->name }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-
-                                    <li><a href="{{ route('blogs') }}">Blog</a></li>
-                                    <li><a href="{{ route('contacts') }}">Contact</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                    <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-headset"></i><span>Need Help?</span> {{ get_option('contact_phone') }} </p>
-                    </div>
-
-                    <div class="header-action-right d-block d-lg-none">
-                        <div class="header-action-2">
-                            <div class="header-action-icon-2">
-                                <a href="{{ route('wishlist.index')}}">
-                                    <img alt="Evara" src="{{ url('/') }}/lucare/assets/imgs/theme/icons/icon-heart.svg">
-                                    <span class="pro-count white">0</span>
-                                </a>
-                            </div>
-                            <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="{{url ('shop-cart')}}">
-                                    <img alt="Evara" src="{{ url('/') }}/lucare/assets/imgs/theme/icons/icon-cart.svg">
-                                    <span class="pro-count white">0</span>
-                                </a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                    <ul>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="{{url ('shop-product')}}"><img alt="Evara" src="{{ url('/') }}/lucare/assets/imgs/shop/thumbnail-3.jpg"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="{{url ('shop-product')}}">Plain Striola Shirts</a></h4>
-                                                <h3><span>1 × </span>$800.00</h3>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="{{url ('shop-product')}}"><img alt="Evara" src="{{ url('/') }}/lucare/assets/imgs/shop/thumbnail-4.jpg"></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="{{url ('shop-product')}}">Macbook Pro 2022</a></h4>
-                                                <h3><span>1 × </span>$3500.00</h3>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="shopping-cart-footer">
-                                        <div class="shopping-cart-total">
-                                            <h4>Total <span>$383.00</span></h4>
-                                        </div>
-                                        <div class="shopping-cart-button">
-                                            <a href="{{url ('shop-cart')}}">View cart</a>
-                                            <a href="shop-checkout.html">Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="header-action-icon-2 d-block d-lg-none">
-                                <div class="burger-icon burger-icon-white">
-                                    <span class="burger-icon-top"></span>
-                                    <span class="burger-icon-mid"></span>
-                                    <span class="burger-icon-bottom"></span>
-                                </div>
-                            </div>
-                        </div>
+            <div class="tawa-header-row d-lg-none align-items-center justify-content-between">
+                <a href="{{ url('/') }}" class="tawa-logo">@include('partials.logo')</a>
+                <div class="d-flex align-items-center">
+                    <a href="{{ route('cart.view') }}" class="tawa-action me-3"><i class="fa fa-shopping-cart"></i><span class="tawa-count">{{ $cartCount }}</span></a>
+                    <div class="burger-icon burger-icon-white">
+                        <span class="burger-icon-top"></span>
+                        <span class="burger-icon-mid"></span>
+                        <span class="burger-icon-bottom"></span>
                     </div>
                 </div>
             </div>
@@ -354,10 +257,6 @@
                 <!-- mobile menu start -->
                 <nav>
                     <ul class="mobile-menu">
-
-
-
-
 
                         @foreach($menuCategories as $mc)
                         <li class="menu-item-has-children">
