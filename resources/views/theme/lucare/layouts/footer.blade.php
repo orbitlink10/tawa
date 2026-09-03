@@ -147,10 +147,13 @@
     <!-- Desktop nav hover dropdown -->
     <script>
         (function () {
-            $('.tawa-nav .dropdown').each(function () {
-                var $li = $(this);
-                $li.on('mouseenter', function () { $li.addClass('open'); });
-                $li.on('mouseleave', function () { $li.removeClass('open'); });
+            if (typeof jQuery === 'undefined') { return; }
+            jQuery(function ($) {
+                $('.tawa-nav .dropdown').each(function () {
+                    var $li = $(this);
+                    $li.on('mouseenter', function () { $li.addClass('open'); });
+                    $li.on('mouseleave', function () { $li.removeClass('open'); });
+                });
             });
         })();
     </script>
