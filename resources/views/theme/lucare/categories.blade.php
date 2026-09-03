@@ -17,15 +17,13 @@
 @section('robots', ($category->noindex || request()->filled('brand')) ? 'noindex, follow' : 'index, follow')
 
 @push('meta')
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": {{ json_encode($h1) }},
-    "url": {{ json_encode(url()->current()) }},
-    "description": {{ json_encode($seoDescription) }}
-}
-</script>
+<script type="application/ld+json">{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'CollectionPage',
+    'name' => $h1,
+    'url' => url()->current(),
+    'description' => $seoDescription,
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
 @endpush
 
 @section('main')

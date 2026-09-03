@@ -11,41 +11,42 @@
 @section('twitter_image', $product->image_src)
 
 @push('meta')
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "@id": {{ json_encode(url()->current().'#product') }},
-    "name": {{ json_encode($product->name) }},
-    "url": {{ json_encode(url()->current()) }},
-    "image": {{ json_encode($product->image_src) }},
-    "description": {{ json_encode(Str::limit(strip_tags($product->short_description ?: $product->description), 300, '')) }},
-    @if($product->sku)
-    "sku": {{ json_encode($product->sku) }},
-    @endif
-    @if($product->model)
-    "mpn": {{ json_encode($product->model) }},
-    @endif
-    @if($product->brand)
-    "brand": { "@type": "Brand", "name": {{ json_encode($product->brand->name) }} },
-    @endif
-    @if($product->category)
-    "category": {{ json_encode($product->category->name) }},
-    @endif
-    @if($product->has_price && $product->price > 0)
-    "offers": {
-        "@type": "Offer",
-        "url": {{ json_encode(url()->current()) }},
-        "priceCurrency": "KES",
-        "price": {{ json_encode((string) $product->price) }},
-        "priceValidUntil": {{ json_encode(now()->addYear()->format('Y-m-d')) }},
-        "availability": {{ json_encode($product->is_in_stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock') }},
-        "itemCondition": "https://schema.org/NewCondition",
-        "seller": { "@id": "{{ url('/') }}#organization" }
+@php
+    $productSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        '@id' => url()->current().'#product',
+        'name' => $product->name,
+        'url' => url()->current(),
+        'image' => $product->image_src,
+        'description' => Str::limit(strip_tags($product->short_description ?: $product->description), 300, ''),
+    ];
+    if ($product->sku) {
+        $productSchema['sku'] = $product->sku;
     }
-    @endif
-}
-</script>
+    if ($product->model) {
+        $productSchema['mpn'] = $product->model;
+    }
+    if ($product->brand) {
+        $productSchema['brand'] = ['@type' => 'Brand', 'name' => $product->brand->name];
+    }
+    if ($product->category) {
+        $productSchema['category'] = $product->category->name;
+    }
+    if ($product->has_price && $product->price > 0) {
+        $productSchema['offers'] = [
+            '@type' => 'Offer',
+            'url' => url()->current(),
+            'priceCurrency' => 'KES',
+            'price' => (string) $product->price,
+            'priceValidUntil' => now()->addYear()->format('Y-m-d'),
+            'availability' => $product->is_in_stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            'itemCondition' => 'https://schema.org/NewCondition',
+            'seller' => ['@id' => url('/').'#organization'],
+        ];
+    }
+@endphp
+<script type="application/ld+json">{!! json_encode($productSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
 @endpush
 
 @section('main')

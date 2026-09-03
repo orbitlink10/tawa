@@ -120,6 +120,11 @@ class ImportCtcCatalog extends Command
                 'product_type' => 'product',
             ];
 
+            $imageUrl = $item['image_url'] ?? $item['photo'] ?? null;
+            if (! empty($imageUrl)) {
+                $data['image_url'] = $imageUrl;
+            }
+
             if ($existing) {
                 $existing->forceFill($data)->save();
                 $updated++;
@@ -178,7 +183,7 @@ class ImportCtcCatalog extends Command
                 'url' => $loc,
                 'slug' => $this->slugFromUrl($loc),
                 'name' => $this->nameFromSlug($this->slugFromUrl($loc)),
-                'photo' => $image,
+                'image_url' => $image,
             ];
         }
 

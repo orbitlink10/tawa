@@ -250,6 +250,23 @@
                                         @endif
                                     </div>
 
+                                    <div class="form-group">
+                                        <label for="imageUrl">Product Image URL (optional)</label>
+                                        <input type="url"
+                                               class="form-control {{ (is_array($errors) && isset($errors['image_url'])) || (!is_array($errors) && $errors->has('image_url')) ? 'is-invalid' : '' }}"
+                                               id="imageUrl"
+                                               name="image_url"
+                                               value="{{ old('image_url') }}"
+                                               placeholder="https://example.com/product-image.webp">
+                                        @if(!is_array($errors))
+                                            @error('image_url')
+                                                <span class="invalid-feedback">{{ $message }}</span>
+                                            @enderror
+                                        @elseif(isset($errors['image_url']))
+                                            <span class="invalid-feedback">{{ $errors['image_url'] }}</span>
+                                        @endif
+                                    </div>
+
                                     <!-- Form Actions -->
                                     <div class="form-footer text-right">
                                         <a href="{{ route('products.index') }}" class="btn btn-secondary">Cancel</a>

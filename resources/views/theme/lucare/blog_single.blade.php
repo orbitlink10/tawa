@@ -17,36 +17,36 @@
 @section('twitter_description', $postDesc)
 @section('twitter_image', $postImage)
 
-@if($isArticle)
+@php
+    $postSchema = $isArticle
+        ? [
+            '@context' => 'https://schema.org',
+            '@type' => 'BlogPosting',
+            'headline' => $post->title,
+            'description' => $postDesc,
+            'image' => $postImage,
+            'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => url()->current()],
+            'datePublished' => $post->created_at?->toAtomString(),
+            'dateModified' => $post->updated_at?->toAtomString(),
+            'author' => ['@type' => 'Organization', 'name' => get_option('site_name')],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => get_option('site_name'),
+                'logo' => ['@type' => 'ImageObject', 'url' => url('/').'/lucare/assets/imgs/theme/og-default.png'],
+            ],
+        ]
+        : [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebPage',
+            'name' => $post->title,
+            'description' => $postDesc,
+            'url' => url()->current(),
+        ];
+@endphp
+
 @push('meta')
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": {{ json_encode($post->title) }},
-    "description": {{ json_encode($postDesc) }},
-    "image": {{ json_encode($postImage) }},
-    "mainEntityOfPage": { "@type": "WebPage", "@id": {{ json_encode(url()->current()) }} },
-    "datePublished": {{ json_encode($post->created_at?->toAtomString()) }},
-    "dateModified": {{ json_encode($post->updated_at?->toAtomString()) }},
-    "author": { "@type": "Organization", "name": {{ json_encode(get_option('site_name')) }} },
-    "publisher": { "@type": "Organization", "name": {{ json_encode(get_option('site_name')) }}, "logo": { "@type": "ImageObject", "url": {{ json_encode(url('/').'/lucare/assets/imgs/theme/og-default.png') }} } }
-}
-</script>
+<script type="application/ld+json">{!! json_encode($postSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
 @endpush
-@else
-@push('meta')
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": {{ json_encode($post->title) }},
-    "description": {{ json_encode($postDesc) }},
-    "url": {{ json_encode(url()->current()) }}
-}
-</script>
-@endpush
-@endif
 
 @section('main')
 

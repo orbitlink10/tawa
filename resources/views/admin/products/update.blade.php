@@ -212,7 +212,7 @@
                                     <div class="form-group">
                                         <label for="productImage">Featured Image</label>
                                         <div class="mb-2">
-                                            <img src="/images?path={{ $product->photo }}" alt="Current Product Image" width="100" height="100">
+                                            <img src="{{ $product->image_src }}" alt="Current Product Image" width="100" height="100">
                                         </div>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input @error('photo') is-invalid @enderror" 
@@ -220,6 +220,19 @@
                                             <label class="custom-file-label" for="productImage">Choose file</label>
                                         </div>
                                         @error('photo')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="imageUrl">Product Image URL</label>
+                                        <input type="url"
+                                               class="form-control @error('image_url') is-invalid @enderror"
+                                               id="imageUrl"
+                                               name="image_url"
+                                               value="{{ old('image_url', $product->image_url) }}"
+                                               placeholder="https://example.com/product-image.webp">
+                                        @error('image_url')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
                                     </div>

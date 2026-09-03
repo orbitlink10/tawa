@@ -1,5 +1,6 @@
 @extends('theme.lucare.layouts.main')
-@section('title') Contact with us @endsection
+@section('title') Contact {{ get_option('site_name') }} | Networking Equipment in Kenya @endsection
+@section('meta_description', 'Contact '.get_option('site_name').' for networking equipment in Kenya. Reach us by phone, email or WhatsApp for product enquiries, quotes and bulk orders.')
 @section('main')
 
 <!--Contact Page Start-->

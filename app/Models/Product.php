@@ -81,15 +81,15 @@ class Product extends Model
     }
 
     /**
-     * Resolved image source: external manufacturer URL > local upload > placeholder.
+     * Resolved image source: local upload > external manufacturer URL > placeholder.
      */
     public function getImageSrcAttribute(): string
     {
-        if (! empty($this->image_url)) {
-            return $this->image_url;
-        }
         if (! empty($this->photo)) {
             return asset('storage/' . $this->photo);
+        }
+        if (! empty($this->image_url)) {
+            return $this->image_url;
         }
 
         return asset('lucare/assets/imgs/shop/product-placeholder.svg');

@@ -10,7 +10,7 @@
       <g:title>{{ $product->name }}</g:title>
       <g:description><![CDATA[{{ $product->description }}]]></g:description>
       <g:link>{{ route('product_details', $product->slug) }}</g:link>
-      <g:image_link>{{ url('/storage/' . $product->photo) }}</g:image_link>
+      <g:image_link>{{ $product->image_src }}</g:image_link>
       <g:price>{{ number_format($product->price, 2) }} KES</g:price>
       <g:availability>in stock</g:availability>
       <g:brand>{{ $product->brand ?? 'Your Brand' }}</g:brand>

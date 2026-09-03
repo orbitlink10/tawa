@@ -4,15 +4,13 @@
 @section('robots', ($brand->noindex || request()->filled('category')) ? 'noindex, follow' : 'index, follow')
 
 @push('meta')
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": {{ json_encode($brand->name.' Products in Kenya') }},
-    "url": {{ json_encode(url()->current()) }},
-    "description": {{ json_encode($brand->meta_description) }}
-}
-</script>
+<script type="application/ld+json">{!! json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'CollectionPage',
+    'name' => $brand->name.' Products in Kenya',
+    'url' => url()->current(),
+    'description' => $brand->meta_description,
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
 @endpush
 
 @section('main')

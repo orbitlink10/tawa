@@ -51,7 +51,7 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="img-box me-3">
-                                                <img src="{{ url('/') }}/storage/{{ $item['photo'] }}" alt="" class="img-fluid" width="100">
+                                                <img src="{{ $item['image_src'] ?? (!empty($item['photo']) ? asset('storage/'.$item['photo']) : asset('lucare/assets/imgs/shop/product-placeholder.svg')) }}" alt="" class="img-fluid" width="100">
                                             </div>
                                             <h5 class="mb-0"><a href="#" class="text-dark">{{ $item['name'] }}</a></h5>
                                         </div>

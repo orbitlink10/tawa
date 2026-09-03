@@ -15,19 +15,21 @@
 </nav>
 
 <script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        @foreach($items as $i => $item)
-        {
-            "@type": "ListItem",
-            "position": {{ $i + 1 }},
-            "name": {{ json_encode($item['label']) }},
-            "item": {{ json_encode($item['url']) }}
-        }@if(!$loop->last),@endif
-        @endforeach
-    ]
-}
+@php
+    $breadcrumbSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [],
+    ];
+    foreach ($items as $i => $item) {
+        $breadcrumbSchema['itemListElement'][] = [
+            '@type' => 'ListItem',
+            'position' => $i + 1,
+            'name' => $item['label'],
+            'item' => $item['url'],
+        ];
+    }
+@endphp
+{!! json_encode($breadcrumbSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}
 </script>
 @endif

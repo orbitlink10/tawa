@@ -227,7 +227,8 @@ public function store(Request $request)
         'sub_category_id' => 'nullable|exists:sub_categories,id',
         'meta_description'=> 'nullable|string',
         'description'     => 'required|string',
-        'photo'           => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        'image_url'       => 'nullable|url|max:2048',
+        'photo'           => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
     ]);
 
     if ($validator->fails()) {
@@ -245,7 +246,8 @@ public function store(Request $request)
         'category_id',
         'sub_category_id',
         'meta_description',
-        'description'
+        'description',
+        'image_url',
     ]);
 
     // Generate a URL-friendly slug from the product name

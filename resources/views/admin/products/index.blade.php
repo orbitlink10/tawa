@@ -67,7 +67,7 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>
-                                                    <img class="default-img" src="{{ url('/') }}/storage/{{ $product->photo }}" style="width: 150px;" alt="">
+                                                    <img class="default-img" src="{{ $product->image_src }}" style="width: 150px;" alt="{{ $product->image_alt }}">
                                                 </td>
                                                 <td>{{ $product->name }}</td>
                                                 <td>{{ $product->slug }}</td>

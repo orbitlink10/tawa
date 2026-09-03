@@ -9,7 +9,7 @@
             @foreach($wishlistItems as $item)
                 <div class="col-md-4">
                     <div class="card">
-                        <img src="{{ $item->product->image_url }}" class="card-img-top" alt="{{ $item->product->name }}">
+                        <img src="{{ $item->product->image_src }}" class="card-img-top" alt="{{ $item->product->image_alt }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $item->product->name }}</h5>
                             <p class="card-text">Price: KSh {{ number_format($item->product->price, 2) }}</p>
