@@ -158,9 +158,6 @@
                                 <i class="fab fa-whatsapp"></i> WhatsApp Enquiry
                             </a>
                         @endif
-
-                        @include('theme.lucare.modals.notify')
-                        @include('theme.lucare.modals.quote')
                     </div>
 
                     <div class="delivery-info mt-4 p-3 bg-light rounded">
