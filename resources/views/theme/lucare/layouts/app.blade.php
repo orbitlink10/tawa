@@ -105,6 +105,15 @@
         .tawa-account:hover { background: #088178; color: #fff; }
 
         .burger-icon { cursor: pointer; width: 26px; }
+
+        /* Bootstrap modal support (theme only ships .custom-modal, not .modal) */
+        .modal { display: none; }
+        .modal.show { display: block; position: fixed; top: 0; left: 0; z-index: 1055; width: 100%; height: 100%; overflow-x: hidden; overflow-y: auto; outline: 0; }
+        .modal-dialog { position: relative; width: auto; margin: 1.75rem auto; max-width: 500px; }
+        .modal-content { position: relative; display: flex; flex-direction: column; width: 100%; background-color: #fff; border-radius: 0.3rem; box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.15); }
+        .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border-bottom: 1px solid #dee2e6; }
+        .modal-body { padding: 1rem; }
+        .modal-backdrop { position: fixed; top: 0; left: 0; z-index: 1050; width: 100vw; height: 100vh; background-color: #000; opacity: 0.5; }
     </style>
 
     <!-- Site-wide JSON-LD: Organization + WebSite -->
