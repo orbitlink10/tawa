@@ -218,6 +218,8 @@
 
   @include('chat_widget')
 
+  @include('partials.zivo_chat')
+
 
 
 </body>

@@ -162,6 +162,7 @@
 </style>
 {!! get_option('chat') !!}
   @yield('scripts')
+  @include('partials.zivo_chat')
 </body>
 
 </html>

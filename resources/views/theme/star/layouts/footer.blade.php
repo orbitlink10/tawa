@@ -107,4 +107,5 @@
 
 
 {!! get_option('chat') !!}
+@include('partials.zivo_chat')
  
