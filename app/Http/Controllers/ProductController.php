@@ -253,6 +253,12 @@ public function store(Request $request)
     // Generate a URL-friendly slug from the product name
     $data['slug'] = Str::slug($data['name']);
 
+    // Generate a unique SKU (required, not nullable)
+    $data['sku'] = strtoupper(Str::slug($data['name'])).'-'.strtoupper(Str::random(6));
+
+    // Flag whether the product has a visible price
+    $data['has_price'] = ! empty($data['price']) && $data['price'] > 0;
+
     // If a photo file is uploaded, store it and add the file path to the data
     if ($request->hasFile('photo')) {
         // Stores the file in storage/app/public/products and returns the path

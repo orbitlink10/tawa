@@ -53,7 +53,7 @@
                                         @enderror
                                     </div>
 
-                                    <!-- Price (initial input, used for non-has_price case) -->
+                                    <!-- Price -->
                                     <div class="form-group">
                                         <label for="productPrice">Price (KES)</label>
                                         <input type="number" class="form-control @error('price') is-invalid @enderror" 
@@ -86,19 +86,6 @@
                                                 {{ $product->has_price ? 'Yes' : 'No' }}
                                             </label>
                                         </div>
-                                    </div>
-
-                                    <!-- Price Input Container -->
-                                    <div class="form-group mt-3" id="priceInputContainer" {{ !$product->has_price ? 'style=display:none;' : '' }}>
-                                        <label for="productPrice">Price (KES)</label>
-                                        <input type="number" 
-                                               class="form-control @error('price') is-invalid @enderror" 
-                                               name="price" 
-                                               value="{{ $product->price }}" 
-                                               id="productPrice">
-                                        @error('price')
-                                            <span class="invalid-feedback">{{ $message }}</span>
-                                        @enderror
                                     </div>
 
                                     <!-- Quantity -->
