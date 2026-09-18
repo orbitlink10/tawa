@@ -305,10 +305,12 @@ public function store(Request $request)
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-$product->has_price = $request->has('has_price') ? 1 : 0;
-$product->save();
+        $product->has_price = $request->has('has_price')
+            ? 1
+            : ($request->filled('price') && $request->input('price') > 0 ? 1 : 0);
+        $product->save();
 
-       return $this->productService->update($request,$id);
+        return $this->productService->update($request,$id);
     }
 
     /**
