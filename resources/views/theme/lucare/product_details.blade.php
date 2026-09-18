@@ -11,6 +11,8 @@
 @section('twitter_image', $product->image_src)
 
 @push('meta')
+{{-- Google requires an offer or genuine review data for Product rich results. --}}
+@if($product->has_price && $product->price > 0)
 @php
     $productSchema = [
         '@context' => 'https://schema.org',
@@ -33,20 +35,19 @@
     if ($product->category) {
         $productSchema['category'] = $product->category->name;
     }
-    if ($product->has_price && $product->price > 0) {
-        $productSchema['offers'] = [
-            '@type' => 'Offer',
-            'url' => url()->current(),
-            'priceCurrency' => 'KES',
-            'price' => (string) $product->price,
-            'priceValidUntil' => now()->addYear()->format('Y-m-d'),
-            'availability' => $product->is_in_stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-            'itemCondition' => 'https://schema.org/NewCondition',
-            'seller' => ['@id' => url('/').'#organization'],
-        ];
-    }
+    $productSchema['offers'] = [
+        '@type' => 'Offer',
+        'url' => url()->current(),
+        'priceCurrency' => 'KES',
+        'price' => (string) $product->price,
+        'priceValidUntil' => now()->addYear()->format('Y-m-d'),
+        'availability' => $product->is_in_stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+        'itemCondition' => 'https://schema.org/NewCondition',
+        'seller' => ['@id' => url('/').'#organization'],
+    ];
 @endphp
 <script type="application/ld+json">{!! json_encode($productSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+@endif
 @endpush
 
 @section('main')
