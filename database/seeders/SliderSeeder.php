@@ -17,7 +17,7 @@ class SliderSeeder extends Seeder
                 'description' => 'Shop routers, switches, wireless access points, fibre optic equipment, structured cabling and CCTV products from leading networking brands.',
                 'button_url' => '/shop',
                 'button_text' => 'Shop Networking Equipment',
-                'img_url' => '/lucare/assets/imgs/shop/thumbnail-3.jpg',
+                'img_url' => '/lucare/assets/imgs/slider/networking-equipment.webp',
             ],
             [
                 'h4_title' => 'Trusted by ISPs & Installers',
@@ -26,7 +26,7 @@ class SliderSeeder extends Seeder
                 'description' => 'RB4011, RB5009, CCR and CRS series routers and switches for ISPs, hotspots and business networks.',
                 'button_url' => '/brand/mikrotik',
                 'button_text' => 'Browse MikroTik',
-                'img_url' => '/lucare/assets/imgs/shop/thumbnail-4.jpg',
+                'img_url' => '/lucare/assets/imgs/slider/mikrotik-rb5009.webp',
             ],
             [
                 'h4_title' => 'Long-Range Wireless',
@@ -35,7 +35,7 @@ class SliderSeeder extends Seeder
                 'description' => 'airMAX CPE, NanoStation and UniFi access points for wireless ISPs and managed networks.',
                 'button_url' => '/brand/ubiquiti',
                 'button_text' => 'Shop Ubiquiti',
-                'img_url' => '/lucare/assets/imgs/shop/thumbnail-3.jpg',
+                'img_url' => '/lucare/assets/imgs/slider/ubiquiti-nanostation.jpg',
             ],
         ];
 
