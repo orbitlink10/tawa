@@ -35,7 +35,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Slug</th>
                         <th scope="col">Photo</th>
-                        <th scope="col" style="width: 200px;">Actions</th>
+                        <th scope="col" style="width: 280px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,7 +56,16 @@
                             </td>
                             <td>
                                 {{-- Action Buttons --}}
-                                <div class="btn-group" role="group">
+                                <div class="btn-group text-nowrap" role="group">
+                                    @if($category->slug)
+                                        <a href="{{ route('view_product_category', ['slug' => $category->slug]) }}"
+                                           target="_blank" rel="noopener noreferrer"
+                                           class="btn btn-sm btn-outline-primary"
+                                           title="Preview {{ $category->name }} on the website (opens in a new tab)">
+                                            <i class="fas fa-external-link-alt" aria-hidden="true"></i> Preview
+                                        </a>
+                                    @endif
+
                                     {{-- Show details --}}
                                     <a href="{{ route('categories.show', $category->id) }}"
                                        class="btn btn-sm btn-info text-white">
