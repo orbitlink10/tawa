@@ -4,102 +4,105 @@
 
 @section('styles')
 <style>
-    /* ===== Homepage first part — Teams purple theme ===== */
-    .tawa-header { background: #e9e8fb; border-bottom-color: transparent; }
-    .tawa-nav > ul > li > a:hover { color: #5b5fc7; background: #ffffff; }
-    .tawa-nav .dropdown-item:hover { color: #5b5fc7; }
-    .tawa-search form { background: #ffffff; border-color: #d7d5ee; }
-    .tawa-search button { background: #5b5fc7; }
-    .tawa-action:hover { color: #5b5fc7; }
-    .tawa-account { background: #5b5fc7; }
-    .tawa-account:hover { background: #4f52b2; color: #fff; }
-    .tawa-count { background: #5b5fc7; }
+    /* ===== Homepage first part — Dahua-style hero ===== */
+    .tawa-header { background: #ffffff; border-bottom: 1px solid #eef1f4; }
+    .tawa-nav > ul > li > a { color: #1a1a1a; }
+    .tawa-nav > ul > li > a:hover { color: #1a1a1a; background: #f2f4f6; }
+    .tawa-nav .dropdown-item:hover { color: #1a1a1a; }
+    .tawa-search form { background: #f5f7f9; border-color: #e4e8ec; }
+    .tawa-search button { background: #1a1a1a; }
+    .tawa-action:hover { color: #1a1a1a; }
+    .tawa-account { background: #1a1a1a; }
+    .tawa-account:hover { background: #000000; color: #fff; }
+    .tawa-count { background: #1a1a1a; }
 
     .home-slider.tawa-home-hero {
-        background: linear-gradient(180deg, #e9e8fb 0%, #d8d6f5 100%);
-        padding-top: 34px;
-        padding-bottom: 54px;
+        background: linear-gradient(180deg, #e8edf1 0%, #dbe3ea 100%);
+        padding-top: 48px;
+        padding-bottom: 0;
         overflow: hidden;
     }
-    .home-slider.tawa-home-hero .single-hero-slider { padding: 10px 0; }
-    .home-slider.tawa-home-hero .hero-slider-content-2 h4 {
-        display: inline-block;
-        font-size: 13.5px;
-        font-weight: 700;
-        letter-spacing: .2px;
-        color: #4f52b2;
-        background: rgba(255, 255, 255, .72);
-        border: 1px solid rgba(91, 95, 199, .20);
-        border-radius: 999px;
-        padding: 7px 15px;
-        margin: 0 0 18px;
-    }
+    .home-slider.tawa-home-hero .single-hero-slider { padding: 0; }
+    .home-slider.tawa-home-hero .hero-slider-content-2 { padding: 24px 0 56px; }
+    .home-slider.tawa-home-hero .hero-slider-content-2 h4 { display: none; }
     .home-slider.tawa-home-hero .hero-slider-content-2 h2 {
-        color: #242424;
-        font-weight: 700;
-        font-size: clamp(34px, 3.4vw, 54px);
-        line-height: 1.08;
-        letter-spacing: -1px;
-        margin: 0 0 16px;
-    }
-    .home-slider.tawa-home-hero .hero-slider-content-2 p {
-        color: #5b5b66;
-        width: 92%;
-        font-size: 17px;
-        line-height: 1.7;
+        color: #16181a;
+        font-weight: 900;
+        font-size: clamp(42px, 5.8vw, 84px);
+        line-height: 0.98;
+        letter-spacing: -2.5px;
+        margin: 0 0 20px;
     }
     .home-slider.tawa-home-hero .hero-slider-content-2 p.text-brand {
-        color: #5b5fc7 !important;
-        font-size: 22px !important;
-        font-weight: 700 !important;
-        line-height: 1.35 !important;
-        margin: 0 0 16px !important;
+        color: #16181a !important;
+        font-size: clamp(22px, 2.6vw, 36px) !important;
+        font-weight: 800 !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.5px;
+        margin: 0 0 18px !important;
         width: 100% !important;
+    }
+    .home-slider.tawa-home-hero .hero-slider-content-2 p {
+        color: #4b5563;
+        width: 88%;
+        font-size: 17px;
+        line-height: 1.7;
     }
     .home-slider.tawa-home-hero .hero-cta {
         display: flex;
         align-items: center;
         gap: 14px;
         flex-wrap: wrap;
-        margin-top: 22px;
+        margin-top: 26px;
     }
     .home-slider.tawa-home-hero .btn-brush-3,
     .home-slider.tawa-home-hero .btn-brush-3:hover {
         background-image: none !important;
-        background-color: #5b5fc7 !important;
-        border: 1px solid #5b5fc7 !important;
+        background-color: #16181a !important;
+        border: 1px solid #16181a !important;
         border-radius: 999px !important;
-        padding: 14px 30px !important;
+        padding: 15px 32px !important;
         color: #fff !important;
         font-family: inherit !important;
         font-weight: 700 !important;
-        box-shadow: 0 12px 28px rgba(91, 95, 199, .36);
+        box-shadow: none;
     }
     .home-slider.tawa-home-hero .btn-brush-3:hover {
-        background-color: #4f52b2 !important;
-        border-color: #4f52b2 !important;
+        background-color: #000000 !important;
+        border-color: #000000 !important;
     }
     .home-slider.tawa-home-hero .hero-cta-secondary {
         background: #fff;
-        color: #242424;
-        border: 1px solid #c9c7e6;
+        color: #16181a;
+        border: 1px solid #16181a;
         border-radius: 999px;
-        padding: 14px 28px;
+        padding: 15px 30px;
         font-weight: 700;
     }
     .home-slider.tawa-home-hero .hero-cta-secondary:hover {
-        background: #fff;
-        border-color: #5b5fc7;
-        color: #4f52b2;
+        background: #16181a;
+        color: #fff;
     }
     .home-slider.tawa-home-hero .dot-style-1 ul li.slick-active button {
-        background: #5b5fc7;
-        border-color: #5b5fc7;
+        background: #16181a;
+        border-color: #16181a;
     }
-    .home-slider.tawa-home-hero .slider-btn { color: #4f52b2; }
+    .home-slider.tawa-home-hero .slider-btn { color: #16181a; }
+    .home-slider.tawa-home-hero .single-slider-img {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
     .home-slider.tawa-home-hero .single-slider-img img {
-        filter: drop-shadow(0 30px 40px rgba(52, 48, 120, .18));
+        max-height: 620px;
+        width: auto;
         max-width: 100%;
+        margin-bottom: -60px;
+        filter: drop-shadow(0 30px 45px rgba(30, 45, 60, .16));
+    }
+    @media (max-width: 991px) {
+        .home-slider.tawa-home-hero .hero-slider-content-2 { padding-bottom: 24px; }
+        .home-slider.tawa-home-hero .single-slider-img img { max-height: 380px; margin-bottom: 0; }
     }
 
     /* ===== Shop by Brand — bordered image grid ===== */
