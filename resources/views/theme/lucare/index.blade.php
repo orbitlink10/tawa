@@ -105,6 +105,47 @@
         .home-slider.tawa-home-hero .single-slider-img img { max-height: 380px; margin-bottom: 0; }
     }
 
+    /* ===== Homepage intro block — Dahua-style ===== */
+    .tawa-hero-intro { background: #ffffff; }
+    .tawa-hero-intro .tawa-intro-title {
+        font-weight: 900;
+        color: #16181a;
+        font-size: clamp(30px, 3.4vw, 46px);
+        letter-spacing: -1.2px;
+        line-height: 1.05;
+        margin: 0;
+    }
+    .tawa-hero-intro .tawa-intro-text {
+        color: #4b5563;
+        max-width: 720px;
+        font-size: 17px;
+        line-height: 1.7;
+    }
+    .tawa-hero-intro .tawa-btn-dark {
+        background: #16181a;
+        border: 1px solid #16181a;
+        color: #fff;
+        font-weight: 700;
+    }
+    .tawa-hero-intro .tawa-btn-dark:hover,
+    .tawa-hero-intro .tawa-btn-dark:focus {
+        background: #000000;
+        border-color: #000000;
+        color: #fff;
+    }
+    .tawa-hero-intro .tawa-btn-outline {
+        background: #fff;
+        border: 1px solid #16181a;
+        color: #16181a;
+        font-weight: 700;
+    }
+    .tawa-hero-intro .tawa-btn-outline:hover,
+    .tawa-hero-intro .tawa-btn-outline:focus {
+        background: #16181a;
+        border-color: #16181a;
+        color: #fff;
+    }
+
     /* ===== Shop by Brand — bordered image grid ===== */
     .tawa-brand-section { background: #fff; }
     .tawa-brand-grid {
@@ -200,14 +241,14 @@
         </section>
 
 
-<section class="py-4" id="hero-intro">
+<section class="py-5 tawa-hero-intro" id="hero-intro">
     <div class="container">
         <div class="text-center">
-            <h1 class="fs-2 fw-bold mb-3">Networking Equipment in Kenya</h1>
-            <p class="text-muted mx-auto mb-4" style="max-width: 720px;">Shop routers, switches, wireless access points, fibre optic equipment, structured cabling and CCTV products from leading networking brands.</p>
+            <h1 class="tawa-intro-title mb-3">Networking Equipment in Kenya</h1>
+            <p class="tawa-intro-text mx-auto mb-4">Shop routers, switches, wireless access points, fibre optic equipment, structured cabling and CCTV products from leading networking brands.</p>
             <div class="d-flex justify-content-center gap-2 flex-wrap">
-                <a href="{{ url('shop') }}" class="btn btn-primary btn-lg rounded-pill px-4">Shop Networking Equipment</a>
-                <a href="{{ route('brands.index') }}" class="btn btn-outline-dark btn-lg rounded-pill px-4">Browse Brands</a>
+                <a href="{{ url('shop') }}" class="btn tawa-btn-dark btn-lg rounded-pill px-4">Shop Networking Equipment</a>
+                <a href="{{ route('brands.index') }}" class="btn tawa-btn-outline btn-lg rounded-pill px-4">Browse Brands</a>
             </div>
         </div>
     </div>
