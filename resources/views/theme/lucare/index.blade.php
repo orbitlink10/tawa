@@ -248,7 +248,9 @@
                 <a href="{{ route('product_details', $item['product']->slug) }}"
                    class="tawa-cover-item {{ $item['brand']->slug === 'ubiquiti' ? 'is-featured' : '' }}"
                    title="{{ $item['brand']->name }} — {{ $item['product']->name }}">
-                    <img src="{{ $item['image'] }}" alt="{{ $item['product']->name }}" loading="lazy" decoding="async">
+                    <img src="{{ $item['image'] }}"
+                         onerror="this.onerror=null;this.src='{{ $item['product']->image_src }}';"
+                         alt="{{ $item['product']->name }}" loading="lazy" decoding="async">
                 </a>
             @endforeach
         </div>
