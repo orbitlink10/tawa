@@ -103,7 +103,7 @@ class WelcomeController extends Controller
             ->limit(8)
             ->get();
 
-$brands = Brand::where('is_active', true)->withCount('products')->orderBy('name')->get();
+$brands = Brand::where('is_active', true)->withCount('products')->with('latestProduct')->orderBy('name')->get();
 
 $mikrotikProducts = Product::whereProductType('product')->where('is_active', true)
     ->whereHas('brand', fn ($q) => $q->where('slug', 'mikrotik'))

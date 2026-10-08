@@ -1,11 +1,169 @@
 @extends('theme.lucare.layouts.main')
 @section('title', 'Networking Equipment Kenya | Routers, Switches & Fibre | Tawa')
 @section('meta_description', 'Shop networking equipment in Kenya from Tawa, including MikroTik routers, Ubiquiti access points, TP-Link devices, switches, fibre optic equipment, network cabinets and structured cabling.')
+
+@section('styles')
+<style>
+    /* ===== Homepage first part — Teams purple theme ===== */
+    .tawa-header { background: #e9e8fb; border-bottom-color: transparent; }
+    .tawa-nav > ul > li > a:hover { color: #5b5fc7; background: #ffffff; }
+    .tawa-nav .dropdown-item:hover { color: #5b5fc7; }
+    .tawa-search form { background: #ffffff; border-color: #d7d5ee; }
+    .tawa-search button { background: #5b5fc7; }
+    .tawa-action:hover { color: #5b5fc7; }
+    .tawa-account { background: #5b5fc7; }
+    .tawa-account:hover { background: #4f52b2; color: #fff; }
+    .tawa-count { background: #5b5fc7; }
+
+    .home-slider.tawa-home-hero {
+        background: linear-gradient(180deg, #e9e8fb 0%, #d8d6f5 100%);
+        padding-top: 34px;
+        padding-bottom: 54px;
+        overflow: hidden;
+    }
+    .home-slider.tawa-home-hero .single-hero-slider { padding: 10px 0; }
+    .home-slider.tawa-home-hero .hero-slider-content-2 h4 {
+        display: inline-block;
+        font-size: 13.5px;
+        font-weight: 700;
+        letter-spacing: .2px;
+        color: #4f52b2;
+        background: rgba(255, 255, 255, .72);
+        border: 1px solid rgba(91, 95, 199, .20);
+        border-radius: 999px;
+        padding: 7px 15px;
+        margin: 0 0 18px;
+    }
+    .home-slider.tawa-home-hero .hero-slider-content-2 h2 {
+        color: #242424;
+        font-weight: 700;
+        font-size: clamp(34px, 3.4vw, 54px);
+        line-height: 1.08;
+        letter-spacing: -1px;
+        margin: 0 0 16px;
+    }
+    .home-slider.tawa-home-hero .hero-slider-content-2 p {
+        color: #5b5b66;
+        width: 92%;
+        font-size: 17px;
+        line-height: 1.7;
+    }
+    .home-slider.tawa-home-hero .hero-slider-content-2 p.text-brand {
+        color: #5b5fc7 !important;
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        line-height: 1.35 !important;
+        margin: 0 0 16px !important;
+        width: 100% !important;
+    }
+    .home-slider.tawa-home-hero .hero-cta {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 22px;
+    }
+    .home-slider.tawa-home-hero .btn-brush-3,
+    .home-slider.tawa-home-hero .btn-brush-3:hover {
+        background-image: none !important;
+        background-color: #5b5fc7 !important;
+        border: 1px solid #5b5fc7 !important;
+        border-radius: 999px !important;
+        padding: 14px 30px !important;
+        color: #fff !important;
+        font-family: inherit !important;
+        font-weight: 700 !important;
+        box-shadow: 0 12px 28px rgba(91, 95, 199, .36);
+    }
+    .home-slider.tawa-home-hero .btn-brush-3:hover {
+        background-color: #4f52b2 !important;
+        border-color: #4f52b2 !important;
+    }
+    .home-slider.tawa-home-hero .hero-cta-secondary {
+        background: #fff;
+        color: #242424;
+        border: 1px solid #c9c7e6;
+        border-radius: 999px;
+        padding: 14px 28px;
+        font-weight: 700;
+    }
+    .home-slider.tawa-home-hero .hero-cta-secondary:hover {
+        background: #fff;
+        border-color: #5b5fc7;
+        color: #4f52b2;
+    }
+    .home-slider.tawa-home-hero .dot-style-1 ul li.slick-active button {
+        background: #5b5fc7;
+        border-color: #5b5fc7;
+    }
+    .home-slider.tawa-home-hero .slider-btn { color: #4f52b2; }
+    .home-slider.tawa-home-hero .single-slider-img img {
+        filter: drop-shadow(0 30px 40px rgba(52, 48, 120, .18));
+        max-width: 100%;
+    }
+
+    /* ===== Shop by Brand — bordered image grid ===== */
+    .tawa-brand-section { background: #fff; }
+    .tawa-brand-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid #e7e7e7;
+        border-left: 1px solid #e7e7e7;
+    }
+    .tawa-brand-tile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        min-height: 340px;
+        padding: 40px 24px;
+        background: #fff;
+        border-right: 1px solid #e7e7e7;
+        border-bottom: 1px solid #e7e7e7;
+        text-decoration: none;
+        transition: background .2s ease;
+    }
+    .tawa-brand-tile:hover { background: #faf9ff; }
+    .tawa-brand-tile-img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+        width: 100%;
+    }
+    .tawa-brand-tile-img img {
+        max-height: 200px;
+        max-width: 100%;
+        object-fit: contain;
+        transition: transform .25s ease;
+    }
+    .tawa-brand-tile:hover .tawa-brand-tile-img img { transform: scale(1.05); }
+    .tawa-brand-tile-name {
+        font-size: 21px;
+        font-weight: 700;
+        color: #3d3d3d;
+        letter-spacing: -.2px;
+    }
+    @media (max-width: 991px) {
+        .tawa-brand-grid { grid-template-columns: repeat(2, 1fr); }
+        .tawa-brand-tile { min-height: 280px; gap: 20px; }
+        .tawa-brand-tile-img { height: 160px; }
+        .tawa-brand-tile-img img { max-height: 160px; }
+        .tawa-brand-tile-name { font-size: 18px; }
+    }
+    @media (max-width: 575px) {
+        .tawa-brand-grid { grid-template-columns: 1fr; }
+        .tawa-brand-tile { min-height: 240px; }
+    }
+</style>
+@endsection
+
 @section('main')
 
 
 
- <section class="home-slider position-relative pt-50">
+ <section class="home-slider tawa-home-hero position-relative pt-50">
             <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
 @foreach($sliders as $slider)
                 <div class="single-hero-slider single-animation-wrap">
@@ -17,7 +175,10 @@
                                     <h2 class="animated fw-900">{{ $slider->h2_title }}</h2>
                                     <p class="animated fw-900 text-brand fs-3">{{ $slider->h1_title }}</p>
                                     <p class="animated">{{ $slider->description }}</p>
-                                    <a class="animated btn btn-brush btn-brush-3" href="{{ $slider->button_url }}"> {{ $slider->button_text }} </a>
+                                    <div class="animated hero-cta">
+                                        <a class="btn btn-brush btn-brush-3" href="{{ $slider->button_url }}"> {{ $slider->button_text }} </a>
+                                        <a class="btn hero-cta-secondary" href="{{ url('shop') }}">Shop All Products</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-6">
@@ -82,24 +243,20 @@
 </section>
 
 
-<section class="brands position-relative py-5" style="background-color: #f8f9fa;">
+<section class="tawa-brand-section py-5">
     <div class="container">
-        <div class="text-center mb-4">
+        <div class="text-center mb-5">
             <h2 class="mb-2">Shop by Brand</h2>
-            <p class="text-muted">Genuine networking equipment from the brands Kenyan installers trust.</p>
+            <p class="text-muted mb-0">Genuine networking equipment from the brands Kenyan installers trust.</p>
         </div>
-        <div class="row g-3 justify-content-center">
+        <div class="tawa-brand-grid">
             @foreach($brands as $brand)
-            <div class="col-6 col-md-3 col-lg-2">
-                <a href="{{ route('brand.show', $brand->slug) }}" class="text-decoration-none text-dark">
-                    <div class="card border-0 shadow-sm text-center py-3 h-100">
-                        <div class="card-body py-2">
-                            <h6 class="mb-0">{{ $brand->name }}</h6>
-                            <small class="text-muted">{{ $brand->products_count }} {{ \Illuminate\Support\Str::plural('product', $brand->products_count) }}</small>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <a href="{{ route('brand.show', $brand->slug) }}" class="tawa-brand-tile">
+                <div class="tawa-brand-tile-img">
+                    <img src="{{ $brand->image_src }}" alt="{{ $brand->name }}" loading="lazy" decoding="async">
+                </div>
+                <span class="tawa-brand-tile-name">{{ $brand->name }}</span>
+            </a>
             @endforeach
         </div>
     </div>

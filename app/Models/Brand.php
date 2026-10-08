@@ -32,6 +32,26 @@ class Brand extends Model
         return $this->hasMany(Product::class);
     }
 
+    public function latestProduct()
+    {
+        return $this->hasOne(Product::class)->latest('id');
+    }
+
+    public function getImageSrcAttribute(): string
+    {
+        if (! empty($this->logo) && $this->logo !== 'logo') {
+            return Str::startsWith($this->logo, ['http://', 'https://'])
+                ? $this->logo
+                : asset('storage/' . $this->logo);
+        }
+
+        if ($this->latestProduct) {
+            return $this->latestProduct->image_src;
+        }
+
+        return asset('lucare/assets/imgs/shop/product-placeholder.svg');
+    }
+
     public function getMetaTitleAttribute($value)
     {
         if (! empty($value)) {
