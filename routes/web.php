@@ -21,6 +21,7 @@ use App\Http\Controllers\DesignController;
 use App\Http\Controllers\CategoryController;
 
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\BrandAdminController;
 
 use App\Http\Controllers\SliderController;
 
@@ -254,6 +255,7 @@ Route::post('/update-category/{id}', [App\Http\Controllers\HomeController::class
 
 Route::resource('sub_categories',SubCategoryController::class);
 Route::resource('products',ProductController::class);
+Route::resource('admin/brands', BrandAdminController::class)->names('admin.brands');
 Route::post('/product-media-save', [App\Http\Controllers\ProductController::class, 'mediaSave'])->name('products.media');
 Route::get('/product/create', [App\Http\Controllers\ProductController::class, 'create'])->name('product.create');
 
