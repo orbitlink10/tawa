@@ -105,6 +105,31 @@ class WelcomeController extends Controller
 
 $brands = Brand::where('is_active', true)->withCount('products')->with('latestProduct')->orderBy('name')->get();
 
+// Curated products for the homepage hero stage (one strong device per brand).
+$heroPicks = [
+    'tenda' => 'tenda-f3-n300-300mbps-wireless-router',
+    'tp-link' => 'tp-link-archer-c80-ac1900-wireless-mu-mimo-wi-fi-5-router',
+    'ubiquiti' => 'ubiquiti-unifi-u7-pro-max-wifi-7-access-point',
+    'mikrotik' => 'mikrotik-mikrotik-l009uigs-2haxd-in-router',
+    'd-link' => 'd-link-dir-825m-ac1200-wi-fi-router-parental-controls',
+];
+$heroProductsBySlug = Product::whereIn('slug', array_values($heroPicks))->get()->keyBy('slug');
+$heroItems = collect($heroPicks)->map(function ($productSlug, $brandSlug) use ($heroProductsBySlug, $brands) {
+    $brand = $brands->firstWhere('slug', $brandSlug);
+    if (! $brand) {
+        return null;
+    }
+    $product = $heroProductsBySlug->get($productSlug) ?: $brand->latestProduct;
+    if (! $product) {
+        return null;
+    }
+
+    $cutout = 'lucare/assets/imgs/hero/' . $brandSlug . '.png';
+    $image = is_file(public_path($cutout)) ? asset($cutout) : $product->image_src;
+
+    return ['brand' => $brand, 'product' => $product, 'image' => $image];
+})->filter()->values();
+
 $mikrotikProducts = Product::whereProductType('product')->where('is_active', true)
     ->whereHas('brand', fn ($q) => $q->where('slug', 'mikrotik'))
     ->with('brand')->orderBy('id', 'desc')->limit(4)->get();
@@ -134,7 +159,7 @@ $services = Service::all();
 $categories = Category::orderBy('id', 'desc')->get();
 
 
-        return view('theme.'.get_option('theme').'.index', compact('pages','posts', 'tags', 'new','options', 'products','brands','mikrotikProducts','ubiquitiProducts','tpLinkProducts','switchProducts','fibreProducts','latestPosts','testimonials', 'services', 'medias','medias2', 'categories', 'sliders'));
+        return view('theme.'.get_option('theme').'.index', compact('pages','posts', 'tags', 'new','options', 'products','brands','heroItems','mikrotikProducts','ubiquitiProducts','tpLinkProducts','switchProducts','fibreProducts','latestPosts','testimonials', 'services', 'medias','medias2', 'categories', 'sliders'));
     }
 
 

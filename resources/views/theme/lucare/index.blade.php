@@ -9,141 +9,156 @@
     .tawa-nav > ul > li > a { color: #1a1a1a; }
     .tawa-nav > ul > li > a:hover { color: #1a1a1a; background: #f2f4f6; }
     .tawa-nav .dropdown-item:hover { color: #1a1a1a; }
-    .tawa-search form { background: #f5f7f9; border-color: #e4e8ec; }
-    .tawa-search button { background: #1a1a1a; }
+    .tawa-search form { background: #ffffff; border-color: #e2e6ec; }
+    .tawa-search input::placeholder { color: #9aa4af; }
+    .tawa-search button { background: #088178; }
     .tawa-action:hover { color: #1a1a1a; }
     .tawa-account { background: #1a1a1a; }
     .tawa-account:hover { background: #000000; color: #fff; }
     .tawa-count { background: #1a1a1a; }
 
-    .home-slider.tawa-home-hero {
-        background: linear-gradient(180deg, #e8edf1 0%, #dbe3ea 100%);
-        padding-top: 48px;
-        padding-bottom: 0;
+    /* ===== Homepage hero — brand product stage ===== */
+    .tawa-cover-hero {
+        position: relative;
+        background: linear-gradient(180deg, #e8edf1 0%, #dbe3ea 70%, #d2dbe4 100%);
         overflow: hidden;
+        padding: 18px 0 0;
     }
-    .home-slider.tawa-home-hero .single-hero-slider { padding: 0; }
-    .home-slider.tawa-home-hero .hero-slider-content-2 { padding: 24px 0 56px; }
-    .home-slider.tawa-home-hero .hero-slider-content-2 h4 { display: none; }
-    .home-slider.tawa-home-hero .hero-slider-content-2 h2 {
-        color: #16181a;
+    .tawa-cover-hero::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 90px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .45) 100%);
+        pointer-events: none;
+    }
+    .tawa-cover-inner { display: flex; flex-direction: column; min-height: 520px; }
+    .tawa-cover-copy { max-width: 880px; margin: 0 auto; text-align: center; }
+    .tawa-cover-eyebrow {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: #64707d;
+        margin-bottom: 8px;
+    }
+    .tawa-cover-title {
         font-weight: 900;
-        font-size: clamp(42px, 5.8vw, 84px);
-        line-height: 0.98;
-        letter-spacing: -2.5px;
-        margin: 0 0 20px;
+        color: #16181a;
+        font-size: clamp(27px, 3.4vw, 46px);
+        line-height: 1.05;
+        letter-spacing: -1.2px;
+        margin: 0 0 8px;
     }
-    .home-slider.tawa-home-hero .hero-slider-content-2 p.text-brand {
-        color: #16181a !important;
-        font-size: clamp(22px, 2.6vw, 36px) !important;
-        font-weight: 800 !important;
-        line-height: 1.15 !important;
-        letter-spacing: -0.5px;
-        margin: 0 0 18px !important;
-        width: 100% !important;
+    .tawa-cover-sub {
+        font-weight: 800;
+        color: #16181a;
+        font-size: clamp(15px, 1.6vw, 21px);
+        letter-spacing: -0.3px;
+        margin: 0 0 8px;
     }
-    .home-slider.tawa-home-hero .hero-slider-content-2 p {
+    .tawa-cover-desc {
         color: #4b5563;
-        width: 88%;
-        font-size: 17px;
-        line-height: 1.7;
+        font-size: 15px;
+        line-height: 1.6;
+        max-width: 620px;
+        margin: 0 auto 14px;
     }
-    .home-slider.tawa-home-hero .hero-cta {
+    .tawa-cover-search {
         display: flex;
         align-items: center;
-        gap: 14px;
-        flex-wrap: wrap;
-        margin-top: 26px;
-    }
-    .home-slider.tawa-home-hero .btn-brush-3,
-    .home-slider.tawa-home-hero .btn-brush-3:hover {
-        background-image: none !important;
-        background-color: #16181a !important;
-        border: 1px solid #16181a !important;
-        border-radius: 999px !important;
-        padding: 15px 32px !important;
-        color: #fff !important;
-        font-family: inherit !important;
-        font-weight: 700 !important;
-        box-shadow: none;
-    }
-    .home-slider.tawa-home-hero .btn-brush-3:hover {
-        background-color: #000000 !important;
-        border-color: #000000 !important;
-    }
-    .home-slider.tawa-home-hero .hero-cta-secondary {
-        background: #fff;
-        color: #16181a;
-        border: 1px solid #16181a;
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto 22px;
+        background: #ffffff;
+        border: 1px solid #e2e6ec;
         border-radius: 999px;
-        padding: 15px 30px;
-        font-weight: 700;
+        padding: 5px 5px 5px 22px;
+        box-shadow: 0 14px 32px rgba(30, 45, 60, .10);
     }
-    .home-slider.tawa-home-hero .hero-cta-secondary:hover {
-        background: #16181a;
-        color: #fff;
+    .tawa-cover-search input {
+        flex: 1;
+        min-width: 0;
+        border: 0;
+        outline: none;
+        background: transparent;
+        height: 46px;
+        font-size: 16px;
+        color: #253d4e;
     }
-    .home-slider.tawa-home-hero .dot-style-1 ul li.slick-active button {
-        background: #16181a;
-        border-color: #16181a;
-    }
-    .home-slider.tawa-home-hero .slider-btn { color: #16181a; }
-    .home-slider.tawa-home-hero .single-slider-img {
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-    }
-    .home-slider.tawa-home-hero .single-slider-img img {
-        max-height: 620px;
-        width: auto;
-        max-width: 100%;
-        margin-bottom: -60px;
-        filter: drop-shadow(0 30px 45px rgba(30, 45, 60, .16));
-    }
-    @media (max-width: 991px) {
-        .home-slider.tawa-home-hero .hero-slider-content-2 { padding-bottom: 24px; }
-        .home-slider.tawa-home-hero .single-slider-img img { max-height: 380px; margin-bottom: 0; }
-    }
-
-    /* ===== Homepage intro block — Dahua-style ===== */
-    .tawa-hero-intro { background: #ffffff; }
-    .tawa-hero-intro .tawa-intro-title {
-        font-weight: 900;
-        color: #16181a;
-        font-size: clamp(30px, 3.4vw, 46px);
-        letter-spacing: -1.2px;
-        line-height: 1.05;
-        margin: 0;
-    }
-    .tawa-hero-intro .tawa-intro-text {
-        color: #4b5563;
-        max-width: 720px;
+    .tawa-cover-search input::placeholder { color: #9aa4af; }
+    .tawa-cover-search button {
+        flex: 0 0 auto;
+        border: 0;
+        background: #088178;
+        color: #ffffff;
+        width: 58px;
+        height: 46px;
+        border-radius: 999px;
+        cursor: pointer;
         font-size: 17px;
-        line-height: 1.7;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background .15s ease;
     }
-    .tawa-hero-intro .tawa-btn-dark {
+    .tawa-cover-search button:hover { background: #046963; }
+    .tawa-cover-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+    .tawa-cover-hero .tawa-btn-dark {
         background: #16181a;
         border: 1px solid #16181a;
         color: #fff;
         font-weight: 700;
     }
-    .tawa-hero-intro .tawa-btn-dark:hover,
-    .tawa-hero-intro .tawa-btn-dark:focus {
+    .tawa-cover-hero .tawa-btn-dark:hover,
+    .tawa-cover-hero .tawa-btn-dark:focus {
         background: #000000;
         border-color: #000000;
         color: #fff;
     }
-    .tawa-hero-intro .tawa-btn-outline {
-        background: #fff;
-        border: 1px solid #16181a;
-        color: #16181a;
-        font-weight: 700;
+    .tawa-cover-link { color: #16181a; font-weight: 700; text-decoration: none; }
+    .tawa-cover-link i { margin-left: 6px; }
+    .tawa-cover-link:hover { color: #000000; }
+    .tawa-cover-stage {
+        margin-top: auto;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: clamp(18px, 3.4vw, 60px);
+        padding: 34px 0 0;
+        position: relative;
+        z-index: 1;
     }
-    .tawa-hero-intro .tawa-btn-outline:hover,
-    .tawa-hero-intro .tawa-btn-outline:focus {
-        background: #16181a;
-        border-color: #16181a;
-        color: #fff;
+    .tawa-cover-item { display: block; line-height: 0; transition: transform .25s ease; }
+    .tawa-cover-item img {
+        height: clamp(96px, 9.5vw, 150px);
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 16px 20px rgba(30, 45, 60, .18));
+        -webkit-box-reflect: below 4px linear-gradient(transparent 62%, rgba(120, 140, 160, .14));
+    }
+    .tawa-cover-item.is-featured img {
+        height: clamp(160px, 16vw, 250px);
+        filter: drop-shadow(0 22px 28px rgba(30, 45, 60, .22));
+    }
+    .tawa-cover-item:hover { transform: translateY(-6px); }
+    @media (max-width: 767px) {
+        .tawa-cover-hero { padding-top: 16px; }
+        .tawa-cover-inner { min-height: 460px; }
+        .tawa-cover-desc { display: none; }
+        .tawa-cover-stage { gap: 12px; padding-top: 26px; }
+        .tawa-cover-item img { height: 80px; }
+        .tawa-cover-item.is-featured img { height: 132px; }
     }
 
     /* ===== Shop by Brand — bordered image grid ===== */
@@ -207,81 +222,35 @@
 
 
 
- <section class="home-slider tawa-home-hero position-relative pt-50">
-            <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
-@foreach($sliders as $slider)
-                <div class="single-hero-slider single-animation-wrap">
-                    <div class="container">
-                        <div class="row align-items-center slider-animated-1">
-                            <div class="col-lg-5 col-md-6">
-                                <div class="hero-slider-content-2">
-                                    <h4 class="animated">{{ $slider->h4_title }}</h4>
-                                    <h2 class="animated fw-900">{{ $slider->h2_title }}</h2>
-                                    <p class="animated fw-900 text-brand fs-3">{{ $slider->h1_title }}</p>
-                                    <p class="animated">{{ $slider->description }}</p>
-                                    <div class="animated hero-cta">
-                                        <a class="btn btn-brush btn-brush-3" href="{{ $slider->button_url }}"> {{ $slider->button_text }} </a>
-                                        <a class="btn hero-cta-secondary" href="{{ url('shop') }}">Shop All Products</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-7 col-md-6">
-                                <div class="single-slider-img single-slider-img-1">
-                                    <img class="animated slider-1-1" src="{{ $slider->img_url }}" alt="{{ $slider->h2_title }}" width="600" height="600" {{ $loop->first ? 'fetchpriority="high"' : 'loading="lazy"' }} decoding="async">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+@php
+    $heroSlide = $sliders->first();
+@endphp
 
-@endforeach
-               
-            </div>
-            <div class="slider-arrow hero-slider-1-arrow"></div>
-        </section>
-
-
-<section class="py-5 tawa-hero-intro" id="hero-intro">
-    <div class="container">
-        <div class="text-center">
-            <h1 class="tawa-intro-title mb-3">Networking Equipment in Kenya</h1>
-            <p class="tawa-intro-text mx-auto mb-4">Shop routers, switches, wireless access points, fibre optic equipment, structured cabling and CCTV products from leading networking brands.</p>
-            <div class="d-flex justify-content-center gap-2 flex-wrap">
-                <a href="{{ url('shop') }}" class="btn tawa-btn-dark btn-lg rounded-pill px-4">Shop Networking Equipment</a>
-                <a href="{{ route('brands.index') }}" class="btn tawa-btn-outline btn-lg rounded-pill px-4">Browse Brands</a>
+<section class="tawa-cover-hero">
+    <div class="container tawa-cover-inner">
+        <div class="tawa-cover-copy">
+            <span class="tawa-cover-eyebrow">{{ optional($heroSlide)->h4_title ?? 'Networking Equipment Supplier' }}</span>
+            <h1 class="tawa-cover-title">{{ optional($heroSlide)->h2_title ?? 'Networking Equipment in Kenya' }}</h1>
+            <p class="tawa-cover-sub">{{ optional($heroSlide)->h1_title ?? 'Routers, Switches, Access Points & Fibre' }}</p>
+            <p class="tawa-cover-desc">{{ optional($heroSlide)->description ?? 'Shop routers, switches, wireless access points, fibre optic equipment, structured cabling and CCTV products from leading networking brands.' }}</p>
+            <form class="tawa-cover-search" action="{{ url('shop') }}" method="get" role="search">
+                <input type="text" name="q" value="{{ request('q') }}" placeholder="Search product, model or brand..." aria-label="Search products" required>
+                <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+            </form>
+            <div class="tawa-cover-actions">
+                <a class="btn tawa-btn-dark btn-lg rounded-pill px-4" href="{{ optional($heroSlide)->button_url ?? url('shop') }}">{{ optional($heroSlide)->button_text ?? 'Shop Networking Equipment' }}</a>
+                <a class="tawa-cover-link" href="{{ route('brands.index') }}">Browse Brands <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
-    </div>
-</section>
 
-
-<section class="featured position-relative py-5">
-    <div class="container">
-        <div class="row g-4">
-            @foreach($categories->take(18) as $category)
-                <div class="col-6 col-md-4 col-lg-2">
-                    <a href="{{ route('view_product_category', ['slug' => $category->slug]) }}" class="text-decoration-none text-dark">
-                        <div class="card category-card border-0 shadow-sm h-100">
-                            <div class="card-img-top position-relative overflow-hidden" style="height: 130px; background:#fff;">
-                                <img src="{{ $category->image_src }}"
-                                     alt="{{ $category->name }}"
-                                     loading="lazy" decoding="async"
-                                     class="img-fluid w-100 h-100" style="object-fit: contain; padding: 10px;">
-                                <div class="overlay d-flex align-items-center justify-content-center">
-                                    <h5 class="text-white fw-bold m-0">{{ $category->name }}</h5>
-                                </div>
-                            </div>
-                            <div class="card-body text-center">
-                                <h6 class="card-title mb-0">{{ $category->name }}</h6>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+        <div class="tawa-cover-stage">
+            @foreach($heroItems as $item)
+                <a href="{{ route('product_details', $item['product']->slug) }}"
+                   class="tawa-cover-item {{ $item['brand']->slug === 'ubiquiti' ? 'is-featured' : '' }}"
+                   title="{{ $item['brand']->name }} — {{ $item['product']->name }}">
+                    <img src="{{ $item['image'] }}" alt="{{ $item['product']->name }}" loading="lazy" decoding="async">
+                </a>
             @endforeach
-        </div>
-        <!-- View All Categories Button -->
-        <div class="text-center mt-4">
-            <a href="{{ route('allcategories') }}" class="btn btn-primary">View All Categories</a>
         </div>
     </div>
 </section>

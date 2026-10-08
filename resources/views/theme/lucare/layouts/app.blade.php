@@ -93,9 +93,11 @@
         }
 
         .tawa-search { flex: 1; max-width: 340px; min-width: 180px; }
-        .tawa-search form { display: flex; align-items: center; border: 1px solid #e2e6ec; border-radius: 999px; overflow: hidden; background: #f7f8fa; }
-        .tawa-search input { flex: 1; border: 0; padding: 9px 16px; font-size: 13.5px; background: transparent; outline: none; color: #253d4e; }
-        .tawa-search button { border: 0; background: #0b6efd; color: #fff; padding: 0 15px; height: 36px; cursor: pointer; }
+        .tawa-search form { display: flex; align-items: center; border: 1px solid #e2e6ec; border-radius: 999px; overflow: hidden; background: #ffffff; }
+        .tawa-search input { flex: 1; border: 0; padding: 9px 18px; font-size: 13.5px; background: transparent; outline: none; color: #253d4e; }
+        .tawa-search input::placeholder { color: #9aa4af; }
+        .tawa-search button { border: 0; background: #088178; color: #fff; padding: 0 16px; height: 32px; margin: 3px; border-radius: 999px; cursor: pointer; }
+        .tawa-search button:hover { background: #046963; }
 
         .tawa-actions { display: flex; align-items: center; gap: 14px; }
         .tawa-action { position: relative; color: #253d4e; font-size: 20px; line-height: 1; text-decoration: none; }
@@ -210,14 +212,13 @@
                                 @endforeach
                             </ul>
                         </li>
-                        <li><a href="{{ route('blogs') }}">Blog</a></li>
                         <li><a href="{{ route('contacts') }}">Contact</a></li>
                     </ul>
                 </nav>
 
                 <div class="tawa-search">
                     <form action="{{ url('shop') }}" method="get">
-                        <input type="text" name="q" placeholder="Search products, models (e.g. RB4011, CPE510)..." required>
+                        <input type="text" name="q" placeholder="Search product, model or brand..." required>
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
@@ -258,7 +259,7 @@
             <div class="mobile-header-content-area">
                 <div class="mobile-search search-style-3 mobile-header-border">
                    <form action="{{ url('shop') }}" method="get">
-                    <input type="text" name="q" placeholder="Search products, models (e.g. RB4011, CPE510)...">
+                    <input type="text" name="q" placeholder="Search product, model or brand...">
                     <button type="submit"><i class="fi-rs-search"></i></button>
                 </form>
             </div>
@@ -283,9 +284,6 @@
 
                         <li class="menu-item-has-children">
                             <a href="{{ route('brands.index') }}">Brands</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="{{ route('blogs') }}">Blog</a>
                         </li>
                         <li class="menu-item-has-children">
                             <a href="{{ route('contacts') }}">Contact</a>
