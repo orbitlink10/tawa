@@ -59,6 +59,13 @@
     <link rel="stylesheet" href="{{ url('/') }}/lucare/assets/css/style.css">
 
     <style>
+        .page-header.breadcrumb-wrap { background: #fff; border-bottom: 1px solid #eceff4; }
+        .tawa-breadcrumbs .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; list-style: none; padding: 0; margin: 0; gap: 8px 0; text-transform: none; font-size: 14px; line-height: 1.6; }
+        .tawa-breadcrumbs .breadcrumb-item { display: inline-flex; align-items: baseline; margin: 0; padding: 0; color: #253d4e; }
+        .tawa-breadcrumbs .breadcrumb-item + .breadcrumb-item::before { content: "/"; float: none; padding: 0 12px; color: #253d4e; }
+        .tawa-breadcrumbs .breadcrumb-item a { color: #6e6e6e; text-decoration: none; }
+        .tawa-breadcrumbs .breadcrumb-item a:hover { color: #088178; text-decoration: underline; }
+
         .tawa-header { background: #fff; border-bottom: 1px solid #eceff4; position: sticky; top: 0; z-index: 1020; }
         .tawa-header .container { max-width: 1400px; }
         .tawa-header-row { height: 62px; gap: 20px; }

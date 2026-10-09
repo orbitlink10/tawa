@@ -2,7 +2,7 @@
     $items = $items ?? [];
 @endphp
 @if(!empty($items))
-<nav aria-label="breadcrumb" class="breadcrumb-wrap">
+<nav aria-label="breadcrumb" class="tawa-breadcrumbs">
     <ol class="breadcrumb bg-transparent px-0 mb-0">
         @foreach($items as $i => $item)
             @if($loop->last)
